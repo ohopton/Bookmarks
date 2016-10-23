@@ -35,7 +35,8 @@ namespace Bookmarks.Api
             HostConfig config = new HostConfig
             {
                 WebHostUrl = baseUri.ToString(),
-                UseHttpsLinks = requireSsl
+                UseHttpsLinks = requireSsl,
+                DefaultRedirectPath = "swagger-ui/"
             };
 
             this.SetConfig(config);

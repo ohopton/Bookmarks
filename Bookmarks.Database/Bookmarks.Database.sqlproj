@@ -65,6 +65,8 @@
   <ItemGroup>
     <Build Include="Tables\Bookmark.sql" />
     <Build Include="Programmability\Stored Procedures\Bookmark_GetByUser.sql" />
+    <Build Include="Programmability\Stored Procedures\Bookmark_Create.sql" />
+    <Build Include="Programmability\Stored Procedures\Bookmark_GetByIdAndUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SchemaCompare\local.scmp" />

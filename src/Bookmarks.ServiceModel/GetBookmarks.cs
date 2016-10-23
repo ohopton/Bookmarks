@@ -4,7 +4,7 @@ using ServiceStack;
 
 namespace Bookmarks.ServiceModel
 {
-    [Route("/bookmarks", "GET")]
+    [Route("/bookmark", "GET")]
     public class GetBookmarks : IGet, IReturn<IList<BookmarkDto>>
     {
     }

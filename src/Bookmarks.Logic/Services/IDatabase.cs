@@ -5,6 +5,7 @@ namespace Bookmarks.Logic.Services
 {
     public interface IDatabase
     {
-        Task<IReadOnlyList<T>> QuerySync<T>(string sql, object param);
+        Task<IReadOnlyList<T>> QueryAsync<T>(string sql, object param);
+        Task<T> QuerySingleAsync<T>(string sql, object param);
     }
 }

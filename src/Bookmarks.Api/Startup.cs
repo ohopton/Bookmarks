@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Bookmarks.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +10,8 @@ using ServiceStack;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using Bookmarks.Logic.Services;
+using Dapper;
+using Bookmarks.Logic.TypeHandlers;
 
 namespace Bookmarks.Api
 {
@@ -32,6 +35,8 @@ namespace Bookmarks.Api
             services.AddSingleton<IBookmarkManager, BookmarkManager>();
             services.AddSingleton<IDbConnectionFactory>(s => new OrmLiteConnectionFactory(this.configuration["Database:ConnectionString"], SqlServerDialect.Provider));
             services.AddSingleton<IDatabase, Database>();
+
+            SqlMapper.AddTypeHandler(new UriTypeHandler());
         }
     }
 }

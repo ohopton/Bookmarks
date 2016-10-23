@@ -20,15 +20,27 @@ namespace Bookmarks.Logic.Services
             this.logger = logger;
         }
 
-        public async Task<IReadOnlyList<T>> QuerySync<T>(string sql, object param)
+        private async Task<IReadOnlyList<T>> InternalQueryAsync<T>(string sql, object param)
         {
-            this.logger.LogInformation($"Executing {sql} with parameters {param} to get IReadOnlyList<{typeof(T).Name}>");
-
             using (IDbConnection connection = this.dbConnectionFactory.Open())
             {
                 IEnumerable<T> results = await connection.QueryAsync<T>(sql, param, commandType: CommandType.StoredProcedure);
                 return results.ToList();
             }
+        }
+
+        public async Task<IReadOnlyList<T>> QueryAsync<T>(string sql, object param)
+        {
+            this.logger.LogInformation($"Executing {sql} with parameters {param} to get IReadOnlyList<{typeof(T).Name}>");
+            return await this.InternalQueryAsync<T>(sql, param);
+        }
+
+        public async Task<T> QuerySingleAsync<T>(string sql, object param)
+        {
+            this.logger.LogInformation($"Executing {sql} with parameters {param} to get {typeof(T).Name}");
+
+            IReadOnlyList<T> results = await this.InternalQueryAsync<T>(sql, param);
+            return results.SingleOrDefault();
         }
     }
 }
