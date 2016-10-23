@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "Bookmarks.Logic": "1.0.0-*",
+    "Bookmarks.ServiceModel": "1.0.0-*",
+    "NETStandard.Library": "1.6.0",
+    "ServiceStack.Core": "1.0.*"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

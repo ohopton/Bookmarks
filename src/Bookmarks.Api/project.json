@@ -1,0 +1,35 @@
+﻿{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "type": "platform",
+      "version": "1.0.1"
+    },
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
+    "Microsoft.Extensions.Logging.Console": "1.0.0",
+    "ServiceStack.Core": "1.0.*",
+    "Bookmarks.ServiceInterface": "1.0.0-*",
+    "Bookmarks.Logic": "1.0.0-*",
+    "ServiceStack.Api.Swagger.Core": "1.0.*",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0"
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": "dnxcore50"
+    }
+  },
+  "runtimes": {
+    "win10-x64": {}
+  },
+  "publishOptions": {
+    "include": [
+      "appsettings.json"
+    ]
+  }
+}
