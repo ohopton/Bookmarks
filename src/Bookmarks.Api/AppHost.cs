@@ -1,7 +1,6 @@
 ﻿using System;
 using Bookmarks.ServiceInterface;
 using Funq;
-using Microsoft.Extensions.Configuration;
 using ServiceStack;
 using ServiceStack.Api.Swagger;
 using ServiceStack.Auth;
@@ -12,9 +11,9 @@ namespace Bookmarks.Api
 {
     public class AppHost : AppHostBase
     {
-        private readonly IConfiguration configuration;
+        private readonly IAppHostConfig configuration;
 
-        public AppHost(IConfiguration configuration) : base("Bookmarks.Api", typeof(BookmarkService).GetAssembly())
+        public AppHost(IAppHostConfig configuration) : base("Bookmarks.Api", typeof(BookmarkService).GetAssembly())
         {
             this.configuration = configuration;
         }
@@ -26,7 +25,7 @@ namespace Bookmarks.Api
             Text.JsConfig<DateTime?>.SerializeFn = d => d?.ToString("yyyy-MM-ddTHH:mm:ssZ");
 
             // get the Uri we're running on
-            Uri baseUri = new Uri(this.configuration["Bookmarks.Api:Uri"]);
+            Uri baseUri = this.configuration.BaseUri;
 
             // if we're on a https url then we require SSL
             bool requireSsl = baseUri.Scheme == "https";
@@ -53,9 +52,9 @@ namespace Bookmarks.Api
                 new IAuthProvider[] {
                     new JwtAuthProviderReader {
                         HashAlgorithm = "HS256",
-                        Audience = this.configuration["Auth0:ClientId"],
-                        AuthKeyBase64 = this.configuration["Auth0:ClientSecret"].Replace('-', '+').Replace('_', '/'),
-                        Issuer = this.configuration["Auth0:Domain"],
+                        Audience = this.configuration.Auth0ClientId,
+                        AuthKeyBase64 = this.configuration.Auth0ClientSecret,
+                        Issuer = this.configuration.Auth0Domain,
                         RequireSecureConnection = requireSsl,
                         PopulateSessionFilter = (session, payload, request) =>
                         {

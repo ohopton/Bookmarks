@@ -27,7 +27,14 @@ namespace Bookmarks.Api
                 .Build();
 
             loggerFactory.AddConsole();
-            app.UseServiceStack(new AppHost(this.configuration));
+
+            app.UseServiceStack(new AppHost(new AppHostConfig()
+            {
+                BaseUri = new Uri(this.configuration["Bookmarks.Api:Uri"]),
+                Auth0ClientId = this.configuration["Auth0:ClientId"],
+                Auth0ClientSecret = this.configuration["Auth0:ClientSecret"].Replace('-', '+').Replace('_', '/'),
+                Auth0Domain = this.configuration["Auth0:Domain"]
+            }));
         }
 
         public void ConfigureServices(IServiceCollection services)
