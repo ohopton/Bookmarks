@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>Bookmarks.ServiceInterface</AssemblyName>
+    <PackageId>Bookmarks.ServiceInterface</PackageId>
+    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Bookmarks.Logic\Bookmarks.Logic.csproj" />
+    <ProjectReference Include="..\Bookmarks.ServiceModel\Bookmarks.ServiceModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ServiceStack.Core" Version="1.0.*" />
+  </ItemGroup>
+
+</Project>
